@@ -101,21 +101,21 @@ describe('ChatInterfaceTRPC Basic Tests', () => {
 
     it('should render the chat interface', () => {
         renderComponent();
-        
+
         // Check that the component renders without crashing - look for the main container
         expect(screen.getByText('AI Chat Assistant')).toBeInTheDocument();
     });
 
     it('should render empty state message', () => {
         renderComponent();
-        
+
         // Should show welcome message for empty state
         expect(screen.getByText('Welcome to AI Chat!')).toBeInTheDocument();
     });
 
     it('should render input form', () => {
         renderComponent();
-        
+
         // Check for input elements
         expect(screen.getByPlaceholderText(/type your message/i)).toBeInTheDocument();
         // The send button doesn't have text, just an icon, so check by class or role
@@ -124,7 +124,7 @@ describe('ChatInterfaceTRPC Basic Tests', () => {
 
     it('should render chat title', () => {
         renderComponent();
-        
+
         // Check for any heading (h4, h5, h6 are all present)
         expect(screen.getByText('AI Chat Assistant')).toBeInTheDocument();
     });

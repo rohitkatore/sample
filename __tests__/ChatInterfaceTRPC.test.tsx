@@ -160,10 +160,10 @@ describe('ChatInterfaceTRPC Component', () => {
 
             // Check for main chat container
             expect(screen.getByRole('main')).toBeInTheDocument();
-            
+
             // Check for input textarea
             expect(screen.getByPlaceholderText(/type your message/i)).toBeInTheDocument();
-            
+
             // Check for send button
             expect(screen.getByRole('button', { name: /send/i })).toBeInTheDocument();
         });
@@ -214,7 +214,7 @@ describe('ChatInterfaceTRPC Component', () => {
 
             // Check for user message
             expect(screen.getByText('Hello, how can I help you?')).toBeInTheDocument();
-            
+
             // Check for AI response
             expect(screen.getByText('I can help you with various tasks!')).toBeInTheDocument();
         });
@@ -240,16 +240,16 @@ describe('ChatInterfaceTRPC Component', () => {
             renderComponent();
 
             const textarea = screen.getByPlaceholderText(/type your message/i);
-            
+
             await user.type(textarea, 'Test message');
-            
+
             expect(textarea).toHaveValue('Test message');
         });
 
         it('should send regular text message when form is submitted', async () => {
             const user = userEvent.setup();
             mockSendMessage.mockResolvedValue({ success: true });
-            
+
             renderComponent();
 
             const textarea = screen.getByPlaceholderText(/type your message/i);
@@ -267,7 +267,7 @@ describe('ChatInterfaceTRPC Component', () => {
         it('should send message when Enter key is pressed', async () => {
             const user = userEvent.setup();
             mockSendMessage.mockResolvedValue({ success: true });
-            
+
             renderComponent();
 
             const textarea = screen.getByPlaceholderText(/type your message/i);
@@ -307,7 +307,7 @@ describe('ChatInterfaceTRPC Component', () => {
         it('should generate image when image command is submitted', async () => {
             const user = userEvent.setup();
             mockGenerateImage.mockResolvedValue({ success: true });
-            
+
             renderComponent();
 
             const textarea = screen.getByPlaceholderText(/type your message/i);
@@ -333,7 +333,7 @@ describe('ChatInterfaceTRPC Component', () => {
         it('should clear chat history when confirmed', async () => {
             const user = userEvent.setup();
             (window.confirm as jest.Mock).mockReturnValue(true);
-            
+
             renderComponent();
 
             const clearButton = screen.getByRole('button', { name: /clear chat history/i });
@@ -348,7 +348,7 @@ describe('ChatInterfaceTRPC Component', () => {
         it('should not clear chat history when cancelled', async () => {
             const user = userEvent.setup();
             (window.confirm as jest.Mock).mockReturnValue(false);
-            
+
             renderComponent();
 
             const clearButton = screen.getByRole('button', { name: /clear chat history/i });
@@ -378,7 +378,7 @@ describe('ChatInterfaceTRPC Component', () => {
             const user = userEvent.setup();
             const consoleError = jest.spyOn(console, 'error').mockImplementation();
             mockSendMessage.mockRejectedValue(new Error('Network error'));
-            
+
             renderComponent();
 
             const textarea = screen.getByPlaceholderText(/type your message/i);
@@ -404,7 +404,7 @@ describe('ChatInterfaceTRPC Component', () => {
 
             // Check for main content area
             expect(screen.getByRole('main')).toBeInTheDocument();
-            
+
             // Check for form elements
             expect(screen.getByRole('textbox')).toBeInTheDocument();
             expect(screen.getByRole('button', { name: /send/i })).toBeInTheDocument();

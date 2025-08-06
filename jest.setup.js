@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom'
+import "@testing-library/jest-dom";
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
@@ -29,10 +29,10 @@ global.ResizeObserver = class ResizeObserver {
 };
 
 // Mock scrollIntoView
-window.HTMLElement.prototype.scrollIntoView = function() {};
+window.HTMLElement.prototype.scrollIntoView = function () {};
 
 // Mock react-hot-toast
-jest.mock('react-hot-toast', () => ({
+jest.mock("react-hot-toast", () => ({
   toast: {
     success: jest.fn(),
     error: jest.fn(),
@@ -46,7 +46,7 @@ jest.mock('react-hot-toast', () => ({
 }));
 
 // Mock Next.js router
-jest.mock('next/navigation', () => ({
+jest.mock("next/navigation", () => ({
   useRouter() {
     return {
       push: jest.fn(),
@@ -59,6 +59,6 @@ jest.mock('next/navigation', () => ({
     return new URLSearchParams();
   },
   usePathname() {
-    return '/';
+    return "/";
   },
 }));
