@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 // Add interface for message type
 interface Message {
@@ -253,7 +254,7 @@ export default function ChatInterfaceTRPC({ userId, userName }: ChatInterfacePro
                             <i className="bi bi-chat-dots text-white"></i>
                         </div>
                         <div>
-                            <h5 className="mb-0 text-light">AI Chat Assistant</h5>
+                            <h5 className="mb-0 text-light">sample</h5>
                             <small className="text-muted">Welcome, {userName}!</small>
                         </div>
                     </div>
@@ -311,12 +312,47 @@ export default function ChatInterfaceTRPC({ userId, userName }: ChatInterfacePro
                                     <div className="flex-grow-1">
                                         {message.content_type === 'image' ? (
                                             <div>
-                                                <img
-                                                    src={message.content}
-                                                    alt="Generated Image"
-                                                    className="img-fluid rounded mb-2"
-                                                    style={{ maxWidth: '100%', maxHeight: '400px', objectFit: 'contain' }}
-                                                />
+                                                <div className="position-relative">
+                                                    <img
+                                                        src={message.content}
+                                                        alt="Generated Image"
+                                                        className="img-fluid rounded mb-2"
+                                                        style={{ 
+                                                            maxWidth: '100%', 
+                                                            maxHeight: '400px', 
+                                                            objectFit: 'contain',
+                                                            backgroundColor: '#f8f9fa'
+                                                        }}
+                                                        onError={(e) => {
+                                                            console.error('Image failed to load:', message.content);
+                                                            const target = e.target as HTMLImageElement;
+                                                            target.style.display = 'none';
+                                                            const errorDiv = target.nextElementSibling as HTMLDivElement;
+                                                            if (errorDiv) errorDiv.style.display = 'block';
+                                                        }}
+                                                        onLoad={() => {
+                                                            console.log('Image loaded successfully:', message.content);
+                                                        }}
+                                                        crossOrigin="anonymous"
+                                                        referrerPolicy="no-referrer"
+                                                    />
+                                                    {/* Error fallback */}
+                                                    <div 
+                                                        className="alert alert-warning mb-2" 
+                                                        style={{ display: 'none' }}
+                                                    >
+                                                        <i className="bi bi-exclamation-triangle me-2"></i>
+                                                        Image failed to load. 
+                                                        <a 
+                                                            href={message.content} 
+                                                            target="_blank" 
+                                                            rel="noopener noreferrer"
+                                                            className="alert-link"
+                                                        >
+                                                            Click here to view
+                                                        </a>
+                                                    </div>
+                                                </div>
                                                 <div className="d-flex gap-2">
                                                     <button
                                                         className="btn btn-outline-secondary btn-sm"
