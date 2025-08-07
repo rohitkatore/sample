@@ -24,7 +24,7 @@ export default async function Home() {
                 <i className="bi bi-chat-dots text-white"></i>
               </div>
               <div>
-                <h5 className="mb-0 text-light">AI Chat Assistant</h5>
+                <h5 className="mb-0 text-light">sample</h5>
                 <small className="text-muted">Please login to continue</small>
               </div>
             </div>
